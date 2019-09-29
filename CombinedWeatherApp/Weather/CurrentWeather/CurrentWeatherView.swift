@@ -50,16 +50,12 @@ struct CurrentWeatherView: View {
 private extension CurrentWeatherView {
   func content() -> some View {
     if let rowData = resource.data {
-      return AnyView(details(for: rowData))
+      return AnyView(rowData)
     } else {
       return AnyView(loading)
     }
   }
-
-  func details(for rowData: CurrentWeatherRowViewModel) -> some View {
-    CurrentWeatherRow(viewModel: rowData)
-  }
-
+  
   var loading: some View {
     Text("Loading \(store.city)'s weather...")
       .foregroundColor(.gray)

@@ -33,7 +33,7 @@ struct OpenWeatherAPI {
   static let scheme = "https"
   static let host = "api.openweathermap.org"
   static let path = "/data/2.5"
-  static let key = "your api key"
+  static let key = ""
 }
 
 extension OpenWeatherAPI {
@@ -53,18 +53,39 @@ extension OpenWeatherAPI {
   }
 }
 
-protocol WeatherFetchable {
+
+protocol WeatherFetchable: class {
   static var endpoint: String {get}
   var session: URLSession {get}
-  associatedtype ResourceType
-  var data: ResourceType {get set}
+  associatedtype JSONDecoded: Decodable
+  var data: JSONDecoded? {get set}
   var cancellable: AnyCancellable? {get set}
+  func request(_ city: String) -> AnyPublisher<JSONDecoded, WeatherError>
   func load(_ city: String)
 }
 
 extension WeatherFetchable {
   var session: URLSession {
     URLSession.shared
+  }
+  func request(_ city: String) -> AnyPublisher<JSONDecoded, WeatherError> {
+    forecast(with: OpenWeatherAPI.makeComponents(Self.endpoint, city))
+  }
+  func load(_ city: String) {
+    cancellable = request(city)
+    .receive(on: DispatchQueue.main)
+    .sink(
+      receiveCompletion: { [weak self] value in
+        switch value {
+        case .failure:
+          self?.data = nil
+        case .finished:
+          break
+        }
+      },
+      receiveValue: { [weak self] forecast in
+        self?.data = forecast
+    })
   }
   func forecast<T>(
     with components: URLComponents
@@ -88,49 +109,20 @@ final class WeeklyForecast: WeatherFetchable, ObservableObject {
   static var endpoint: String {
     "/forecast"
   }
-  @Published var data = [DailyWeatherRowViewModel]()
-  var cancellable: AnyCancellable?
-  func load(_ city: String) {
-    let p: AnyPublisher<WeeklyForecastResponse, WeatherError> = forecast(with: OpenWeatherAPI.makeComponents(WeeklyForecast.endpoint, city))
-    cancellable = p.map { response in
-      response.list.map(DailyWeatherRowViewModel.init)
+  var data: WeeklyForecastResponse? = nil {
+    didSet {
+      list = data?.list ?? []
     }
-    .map(Array.removeDuplicates)
-    .receive(on: DispatchQueue.main)
-    .sink(
-      receiveCompletion: { [weak self] value in
-        switch value {
-        case .failure:
-          self?.data = []
-        case .finished:
-          break
-        }
-      },
-      receiveValue: { [weak self] forecast in
-        self?.data = forecast
-    })
   }
+  @Published var list = [DailyWeatherRow]()
+  var cancellable: AnyCancellable?
+
 }
 
 final class CurForecast: WeatherFetchable, ObservableObject {
   static var endpoint: String {
     "/weather"
   }
-  @Published var data: CurrentWeatherRowViewModel? = nil
+  @Published var data: CurrentWeatherRow? = nil
   var cancellable: AnyCancellable?
-  func load(_ city: String) {
-    let p: AnyPublisher<CurrentWeatherForecastResponse, WeatherError> = forecast(with: OpenWeatherAPI.makeComponents(CurForecast.endpoint, city))
-    cancellable = p.map(CurrentWeatherRowViewModel.init)
-      .receive(on: DispatchQueue.main)
-      .sink(receiveCompletion: { value in
-        switch value {
-        case .failure:
-          self.data = nil
-        case .finished:
-          break
-        }
-      }, receiveValue: { weather in
-          self.data = weather
-      })
-  }
 }

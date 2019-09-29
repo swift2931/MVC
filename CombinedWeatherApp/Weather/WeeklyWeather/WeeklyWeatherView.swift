@@ -30,22 +30,26 @@ import SwiftUI
 
 final class Store: ObservableObject {
   @Published var city = ""
-  @Published var resource = WeeklyForecast()
+  @Published var weekly = WeeklyForecast()
+  @Published var curDetail = CurForecast()
   init() {
     _ = $city
       .dropFirst(1)
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue(label: "WeatherViewModel"))
-      .sink(receiveValue: resource.load(_:))
+      .sink(receiveValue: weekly.load(_:))
   }
 }
 
 struct WeeklyWeatherView: View {
   @EnvironmentObject var store: Store
+  var weekList: [DailyWeatherRow] {
+    store.weekly.list
+  }
   var body: some View {
     NavigationView {
       List {
         searchField
-        if store.resource.data.isEmpty {
+        if weekList.isEmpty {
           emptySection
         } else {
           cityHourlyWeatherSection
@@ -67,7 +71,7 @@ private extension WeeklyWeatherView {
 
   var forecastSection: some View {
     Section {
-      ForEach(store.resource.data, content: DailyWeatherRow.init(viewModel:))
+      ForEach(weekList, content: {daily in daily})
     }
   }
 

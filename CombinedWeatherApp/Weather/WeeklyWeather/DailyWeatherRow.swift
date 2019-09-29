@@ -28,32 +28,66 @@
 
 import SwiftUI
 
-struct DailyWeatherRow: View {
-  private let viewModel: DailyWeatherRowViewModel
-  
-  init(viewModel: DailyWeatherRowViewModel) {
-    self.viewModel = viewModel
-  }
-  
+extension DailyWeatherRow: View {
   var body: some View {
     HStack {
       VStack {
-        Text("\(viewModel.day)")
-        Text("\(viewModel.month)")
+        Text("\(day)")
+        Text("\(month)")
       }
       
       VStack(alignment: .leading) {
-        Text("\(viewModel.title)")
+        Text("\(title)")
           .font(.body)
-        Text("\(viewModel.fullDescription)")
+        Text("\(fullDescription)")
           .font(.footnote)
       }
         .padding(.leading, 8)
 
       Spacer()
 
-      Text("\(viewModel.temperature)°")
+      Text("\(temperature)°")
         .font(.title)
     }
+  }
+}
+
+extension DailyWeatherRow: Identifiable {
+  var id: String {
+    return day + temperature + title
+  }
+  
+  var day: String {
+    return dayFormatter.string(from: date)
+  }
+  
+  var month: String {
+    return monthFormatter.string(from: date)
+  }
+  
+  var temperature: String {
+    return String(format: "%.1f", main.temp)
+  }
+  
+  var title: String {
+    guard let title = weather.first?.main.rawValue else { return "" }
+    return title
+  }
+  
+  var fullDescription: String {
+    guard let description = weather.first?.weatherDescription else { return "" }
+    return description
+  }
+}
+
+// Used to hash on just the day in order to produce a single view model for each
+// day when there are multiple items per each day.
+extension DailyWeatherRow: Hashable {
+  static func == (lhs: DailyWeatherRow, rhs: DailyWeatherRow) -> Bool {
+    return lhs.day == rhs.day
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(self.day)
   }
 }

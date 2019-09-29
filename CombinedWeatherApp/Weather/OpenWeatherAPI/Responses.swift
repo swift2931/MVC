@@ -28,19 +28,15 @@
 
 import Foundation
 
-struct WeeklyForecastResponse: Codable {
-  let list: [Item]
+struct DailyWeatherRow: Codable {
+  let date: Date
+  let main: MainClass
+  let weather: [Weather]
   
-  struct Item: Codable {
-    let date: Date
-    let main: MainClass
-    let weather: [Weather]
-    
-    enum CodingKeys: String, CodingKey {
-      case date = "dt"
-      case main
-      case weather
-    }
+  enum CodingKeys: String, CodingKey {
+    case date = "dt"
+    case main
+    case weather
   }
   
   struct MainClass: Codable {
@@ -64,7 +60,11 @@ struct WeeklyForecastResponse: Codable {
   }
 }
 
-struct CurrentWeatherForecastResponse: Decodable {
+struct WeeklyForecastResponse: Codable {
+  let list: [DailyWeatherRow]
+}
+
+struct CurrentWeatherRow: Decodable {
   let coord: Coord
   let main: Main
   

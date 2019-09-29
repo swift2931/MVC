@@ -10,13 +10,11 @@
 		B22B78A522DF3C92004F21B9 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22B78A222DF3C92004F21B9 /* Formatters.swift */; };
 		B22B78A622DF3C92004F21B9 /* Array+Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22B78A422DF3C92004F21B9 /* Array+Filtering.swift */; };
 		B22B78AA22DF3E54004F21B9 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22B78A922DF3E54004F21B9 /* Responses.swift */; };
-		B263E4BA22C78C95009D0E0E /* CurrentWeatherRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B022C78C95009D0E0E /* CurrentWeatherRowViewModel.swift */; };
 		B263E4BB22C78C95009D0E0E /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B122C78C95009D0E0E /* CurrentWeatherView.swift */; };
 		B263E4BC22C78C95009D0E0E /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B222C78C95009D0E0E /* WeatherError.swift */; };
 		B263E4BD22C78C95009D0E0E /* WeatherFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B322C78C95009D0E0E /* WeatherFetcher.swift */; };
 		B263E4BE22C78C95009D0E0E /* WeeklyWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B522C78C95009D0E0E /* WeeklyWeatherView.swift */; };
 		B263E4C022C78C95009D0E0E /* DailyWeatherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B722C78C95009D0E0E /* DailyWeatherRow.swift */; };
-		B263E4C122C78C95009D0E0E /* DailyWeatherRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4B822C78C95009D0E0E /* DailyWeatherRowViewModel.swift */; };
 		B263E4C722C7AB37009D0E0E /* CurrentWeatherRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B263E4C622C7AB37009D0E0E /* CurrentWeatherRow.swift */; };
 		B26EE1F922C7C575008B6B1D /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26EE1F722C7C575008B6B1D /* Parsing.swift */; };
 		B26EE1FB22C7C5B0008B6B1D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26EE1FA22C7C5B0008B6B1D /* MapView.swift */; };
@@ -31,13 +29,11 @@
 		B22B78A222DF3C92004F21B9 /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		B22B78A422DF3C92004F21B9 /* Array+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Filtering.swift"; sourceTree = "<group>"; };
 		B22B78A922DF3E54004F21B9 /* Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
-		B263E4B022C78C95009D0E0E /* CurrentWeatherRowViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherRowViewModel.swift; sourceTree = "<group>"; };
 		B263E4B122C78C95009D0E0E /* CurrentWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		B263E4B222C78C95009D0E0E /* WeatherError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		B263E4B322C78C95009D0E0E /* WeatherFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherFetcher.swift; sourceTree = "<group>"; };
 		B263E4B522C78C95009D0E0E /* WeeklyWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyWeatherView.swift; sourceTree = "<group>"; };
 		B263E4B722C78C95009D0E0E /* DailyWeatherRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeatherRow.swift; sourceTree = "<group>"; };
-		B263E4B822C78C95009D0E0E /* DailyWeatherRowViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeatherRowViewModel.swift; sourceTree = "<group>"; };
 		B263E4C622C7AB37009D0E0E /* CurrentWeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherRow.swift; sourceTree = "<group>"; };
 		B26EE1F722C7C575008B6B1D /* Parsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
 		B26EE1FA22C7C5B0008B6B1D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -108,7 +104,6 @@
 			children = (
 				B263E4B122C78C95009D0E0E /* CurrentWeatherView.swift */,
 				B263E4C622C7AB37009D0E0E /* CurrentWeatherRow.swift */,
-				B263E4B022C78C95009D0E0E /* CurrentWeatherRowViewModel.swift */,
 			);
 			path = CurrentWeather;
 			sourceTree = "<group>";
@@ -118,7 +113,6 @@
 			children = (
 				B263E4B522C78C95009D0E0E /* WeeklyWeatherView.swift */,
 				B263E4B722C78C95009D0E0E /* DailyWeatherRow.swift */,
-				B263E4B822C78C95009D0E0E /* DailyWeatherRowViewModel.swift */,
 			);
 			path = WeeklyWeather;
 			sourceTree = "<group>";
@@ -263,8 +257,6 @@
 				B263E4C022C78C95009D0E0E /* DailyWeatherRow.swift in Sources */,
 				B2EE1C2A22B7CE610039ABC4 /* AppDelegate.swift in Sources */,
 				B263E4BB22C78C95009D0E0E /* CurrentWeatherView.swift in Sources */,
-				B263E4C122C78C95009D0E0E /* DailyWeatherRowViewModel.swift in Sources */,
-				B263E4BA22C78C95009D0E0E /* CurrentWeatherRowViewModel.swift in Sources */,
 				B263E4C722C7AB37009D0E0E /* CurrentWeatherRow.swift in Sources */,
 				B2EE1C2C22B7CE610039ABC4 /* SceneDelegate.swift in Sources */,
 			);

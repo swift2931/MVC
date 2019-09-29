@@ -27,17 +27,12 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import MapKit
 
-struct CurrentWeatherRow: View {
-  private let viewModel: CurrentWeatherRowViewModel
-  
-  init(viewModel: CurrentWeatherRowViewModel) {
-    self.viewModel = viewModel
-  }
-  
+extension CurrentWeatherRow: View {
   var body: some View {
     VStack(alignment: .leading) {
-      MapView(coordinate: viewModel.coordinate)
+      MapView(coordinate: coordinate)
         .cornerRadius(25)
         .frame(height: 300)
         .disabled(true)
@@ -45,28 +40,50 @@ struct CurrentWeatherRow: View {
       VStack(alignment: .leading) {
         HStack {
           Text("☀️ Temperature:")
-          Text("\(viewModel.temperature)°")
+          Text("\(temperature)°")
             .foregroundColor(.gray)
         }
         
         HStack {
           Text("📈 Max temperature:")
-          Text("\(viewModel.maxTemperature)°")
+          Text("\(maxTemperature)°")
             .foregroundColor(.gray)
         }
         
         HStack {
           Text("📉 Min temperature:")
-          Text("\(viewModel.minTemperature)°")
+          Text("\(minTemperature)°")
             .foregroundColor(.gray)
         }
         
         HStack {
           Text("💧 Humidity:")
-          Text(viewModel.humidity)
+          Text(humidity)
             .foregroundColor(.gray)
         }
       }
     }
+  }
+}
+
+extension CurrentWeatherRow {
+  var temperature: String {
+    return String(format: "%.1f", main.temperature)
+  }
+  
+  var maxTemperature: String {
+    return String(format: "%.1f", main.maxTemperature)
+  }
+  
+  var minTemperature: String {
+    return String(format: "%.1f", main.minTemperature)
+  }
+  
+  var humidity: String {
+    return String(format: "%.1f", main.humidity)
+  }
+  
+  var coordinate: CLLocationCoordinate2D {
+    return CLLocationCoordinate2D.init(latitude: coord.lat, longitude: coord.lon)
   }
 }
